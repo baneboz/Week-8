@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 8 | Flexbox</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        /* flex-flow: row wrap; */
+      }
+      div {
+      }
+      div:nth-child(1) {
+        background-color: yellow;
+        order: 4;
+      }
+      div:nth-child(2) {
+        background-color: orange;
+        order: 3;
+      }
+      div:nth-child(3) {
+        background-color: darkslateblue;
+        order: 2;
+      }
+      div:nth-child(4) {
+        background-color: darkorchid;
+        order: 1;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>1</p>
+    </div>
+    <div>
+      <p>2</p>
+    </div>
+    <div>
+      <p>3</p>
+    </div>
+    <div>
+      <p>4</p>
+    </div>
+  </body>
+</html>
