@@ -404,3 +404,39 @@ a {
 }
 
 /* Desktop - 1200px */
+@media (min-width: 1200px) {
+  .page-header {
+    background-size: cover;
+  }
+  .container-about {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .welcome {
+    width: 30%;
+  }
+  .about-img {
+    margin-inline: 2em;
+    width: calc(30% - 2em);
+  }
+  .dream {
+    width: 30%;
+  }
+
+  .container-client {
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  .client {
+    flex: 0 1 400px;
+  }
+  .card {
+    flex: 1;
+  }
+  .contact-form {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}
