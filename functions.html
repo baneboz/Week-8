@@ -105,7 +105,7 @@
       var howLong = str.length;
       var isThereNum = /\d/.test(str);
 
-      if (isThereNum && howLong >= 6) {
+      if (isThereNum && howLong > 5) {
         successCallback();
       } else {
         errorCallback();
@@ -186,5 +186,80 @@
     // As you can see, everything works fine, but there's room for improvement.
     // For example, there were two loops. Loops can be expensive if they go through
     // a lot of repetitions. You can achieve the same result with only one loop.
+
+    // EXTRA
+    // 1. Write a function that checks if a given string contains 5 digits.
+    // Input: “1b895abd”
+    // Output: true
+    // Input: “1bser9re”
+    // Output: false
+    function check5Digits(str) {
+      var counter = 0;
+
+      for (var i = 0; i < str.length; i++) {
+        if (
+          str[i] === "0" ||
+          str[i] === "1" ||
+          str[i] === "2" ||
+          str[i] === "3" ||
+          str[i] === "4" ||
+          str[i] === "5" ||
+          str[i] === "6" ||
+          str[i] === "7" ||
+          str[i] === "8" ||
+          str[i] === "9"
+        ) {
+          counter++;
+        }
+      }
+      if (counter === 5) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    console.log(check5Digits("1b8955abd"));
+
+    // 2. Write a function that in a given string replaces all the appearances of the string ‘JS’ with ‘**’.
+    // Input: “Programming in JS is super interesting!”
+    // Output: “Programming in ** is super interesting!”
+    function replaceJS(str) {
+      console.log(str.match(/(^|\W)JS($|\W)/));
+      for (var i = 0; i < str.length; i++) {}
+    }
+    // 3. Write a function that inserts a given character on a given position in the string.
+    // Input: “Goo morning”, 4, ‘d’
+    // Output: “Good morning”
+    function insertInString(str, pos, char) {
+      var newStr = str.slice(0, pos - 1) + char + str.slice(pos - 1);
+
+      return newStr;
+    }
+
+    console.log(insertInString("Goo morning", 4, "d"));
+
+    // 4. Write a function that deletes a character from the given position in the string.
+    // Input: “Goodd morning!”, 3
+    // Output: “Good morning!”
+    function deleteInString(str, pos) {
+      var newStr = str.slice(0, pos) + str.slice(pos + 1);
+
+      return newStr;
+    }
+
+    console.log(deleteInString("Goodd morning!", 3));
+
+    // 5. Write a function that deletes every second element of the given array.
+    // Input: [3, 5, 1, 8, 90, -4, 23, 1, 67]
+    // Output: [3, 1, 90, 23, 67]
+    function deleteSecond(arr) {
+      var result = [];
+
+      for (var i = 0; i < arr.length; i += 2) {
+        result.push(arr[i]);
+      }
+      return result;
+    }
+    console.log(deleteSecond([3, 5, 1, 8, 90, -4, 23, 1, 67]));
   </script>
 </html>
