@@ -512,42 +512,23 @@
     // plusSign("+d+=3=+s+") ➞ true
     // plusSign("f++d+g+8+") ➞ false
     // plusSign("+s+7+fg+r+8+") ➞ false
-    // console.log("** TASK 3 **");
-    // function plusSign(str) {
-    //   // var pre = "";
-    //   // var post = "";
-    //   var regex = /[a-z]/i;
+    console.log("** TASK 3 **");
 
-    //   for (var i = 0; i < str.length; i++) {
-    //     // console.log(str[i].search(regex));
+    function plusSign(str) {
+      var regex = /[a-z]/i;
 
-    //     if (
-    //       str[i].search(regex) === 0 &&
-    //       str[i - 1] === "+" &&
-    //       str[i + 1] === "+"
-    //     ) {
-    //       return true;
-    //     }
+      for (var i = 0; i < str.length; i++) {
+        if (regex.test(str[i])) {
+          if (str[i - 1] !== "+" || str[i + 1] !== "+") {
+            return false;
+          }
+        }
+      }
 
-    //     if (
-    //       str[i] !== "0" &&
-    //       str[i] !== "1" &&
-    //       str[i] !== "2" &&
-    //       str[i] !== "3" &&
-    //       str[i] !== "4" &&
-    //       str[i] !== "5" &&
-    //       str[i] !== "6" &&
-    //       str[i] !== "7" &&
-    //       str[i] !== "8" &&
-    //       str[i] !== "9"
-    //     ) {
-    //       // console.log(str[i]);
-    //     }
-    //   }
-    //   return false;
-    // }
+      return true;
+    }
 
-    // console.log(plusSign("+d+=3=+s+"));
+    console.log(plusSign("+s+7+fg+r+8+"));
     // 4. Create a function that takes a 5x5 2D array and returns true if it has at least one Bingo, and false if it doesn't.
     // Only check for diagonals, horizontals and verticals.
     // Examples:
