@@ -527,8 +527,8 @@
 
       return true;
     }
-
     console.log(plusSign("+s+7+fg+r+8+"));
+
     // 4. Create a function that takes a 5x5 2D array and returns true if it has at least one Bingo, and false if it doesn't.
     // Only check for diagonals, horizontals and verticals.
     // Examples:
@@ -549,6 +549,14 @@
     // ]) ➞ true
 
     // bingoCheck([
+    // [12, 43, 31, 74, "x"],
+    // [64, 32, 47, "x", 90],
+    // [37, 65, "x", 83, 54],
+    // [67, "x", 39, 33, 44],
+    // ["x", 59, 24, 30, 42]
+    // ]) ➞ true
+
+    // bingoCheck([
     //   ["x", "x", "x", "x", "x"],
     //   [64, 12, 47, 32, 90],
     //   [37, 16, 68, 83, 54],
@@ -564,6 +572,88 @@
     //   [21, "x", 24, 30, 52]
     // ]) ➞ false
 
+    console.log("** TASK 4 **");
+
+    // check diagonal
+    function checkDiagonal(arr) {
+      var checkDescDiagonal = true;
+      var checkAscDiagonal = true;
+      var j = 0;
+
+      // check diagonal desc
+      for (var i = 0; i < arr.length - 1; i++) {
+        if (arr[i][i] !== arr[i + 1][i + 1]) {
+          checkDescDiagonal = false;
+        }
+      }
+
+      // // check diagonal asc
+      for (var i = arr.length - 1; i > 0; i--) {
+        if (arr[j][i] !== arr[j + 1][i - 1]) {
+          checkAscDiagonal = false;
+        }
+        j++;
+      }
+      if (arr.length && (checkDescDiagonal || checkAscDiagonal)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // check array row is equal
+    function checkRow(arr) {
+      var current = arr[0];
+      for (var i = 1; i < arr.length; i++) {
+        if (current !== arr[i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // convert colums to rows
+    function colsToRows(arr) {
+      var result = [];
+      for (var i = 0; i < arr.length; i++) {
+        result[i] = arr.map((el) => el[i]);
+      }
+      return result;
+    }
+
+    function bingoCheck(arr) {
+      // ukoliko su u jednoj dijagonali isti - bingo
+      var result = checkDiagonal(arr);
+
+      // ukoliko su u jednom redu isti - bingo
+      for (var i = 0; i < arr.length; i++) {
+        if (checkRow(arr[i])) {
+          result = true;
+          break;
+        }
+      }
+
+      // ukoliko su u jednoj koloni isti - bingo
+      var colToRow = colsToRows(arr);
+      for (var i = 0; i < colToRow.length; i++) {
+        if (checkRow(colToRow[i])) {
+          result = true;
+          break;
+        }
+      }
+
+      return result;
+    }
+
+    console.log(
+      bingoCheck([
+        [12, 43, 31, 74, "x"],
+        [64, 32, 47, "x", 90],
+        [37, 65, "x", 83, 54],
+        [67, "x", 39, 33, 44],
+        ["x", 59, 24, 30, 42],
+      ])
+    );
     // 5. When a person receives a blood transfusion, it is essential to make sure that the donor's blood type is compatible with the receiver's blood type.
     // Receiving a blood type that is not compatible with your own can be life-threating, so blood banks always make sure to note the type of blood they receive from donors so that they can ensure a safe transfusion.
     // Blood types are named according to three factors: presence of antigen A, presence of antigen B, and presence of Rh factor. If antigen A is found, the blood type includes the letter "A". If antigen B is found, the blood type includes the letter "B". And if the Rh factor is present, the blood type ends with "+"; otherwise, it ends with "-". If neither antigen A nor antigen B are found, the blood type includes the letter "O".
