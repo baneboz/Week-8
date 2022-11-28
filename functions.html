@@ -397,15 +397,61 @@
     console.log(printNumbersAlignedToRight([78, 111, 4, 4321]));
 
     // EXTRA
-
+    console.log("*** EXTRA ***");
     // 1. Write a function that sorts array while keeping the array structure.
     // Numbers should be first then letters both in ascending order.
     // Examples:
     // numThenChar([[1, 2, 4, 3, "a", "b"], [6, "c", 5], [7, "d"], ["f", "e", 8] ])
     //➞ [[1, 2, 3, 4, 5, 6], [7, 8, "a"], ["b", "c"], ["d", "e", "f"]]
-
     // numThenChar([[1, 2, 4.4, "f", "a", "b"], [0], [0.5, "d","X",3,"s"], ["f", "e", 8], ["p","Y","Z"], [12,18]]) ➞
     // [[0, 0.5, 1, 2, 3, 4.4], [8], [12, 18, "X", "Y", "Z"], ["a", "b", "d"], ["e", "f", "f"], ["p", "s"]]
+    console.log("** TASK 1 **");
+
+    function sortMixedArr(arr) {
+      var sortedArr = arr.sort(function (a, b) {
+        if (typeof a === "number" && typeof b === "number") {
+          return a - b;
+        }
+        // check for num vs string
+        if (typeof a === "number" && typeof b === "string") {
+          return -1;
+        }
+        // check for string vs num
+        if (typeof a === "string" && typeof b === "number") {
+          return 1;
+        }
+        // check for string vs string
+        if (typeof a === "string" && typeof b === "string") {
+          if (a < b) return -1;
+          else return 1;
+        }
+        return 0;
+      });
+      return sortedArr;
+    }
+
+    function numThenChar(arr) {
+      var backToOldStructure = [];
+      var flattenArr = arr.flat();
+      var sortedArr = sortMixedArr(flattenArr);
+
+      for (var i = 0; i < arr.length; i++) {
+        backToOldStructure[i] = sortedArr.splice(0, arr[i].length);
+      }
+
+      return backToOldStructure;
+    }
+
+    console.log(
+      numThenChar([
+        [1, 2, 4.4, "f", "a", "b"],
+        [0],
+        [0.5, "d", "X", 3, "s"],
+        ["f", "e", 8],
+        ["p", "Y", "Z"],
+        [12, 18],
+      ])
+    );
 
     // 2. Create a function that takes the dimensions of two triangles (as arrays) and checks if the first triangle fits into the second one.
     // Triangle fits if it has the same or smaller size as the hole.
@@ -415,6 +461,7 @@
     // doesTriangleFit([1, 1, 1], [2, 2, 2]) ➞ true
     // doesTriangleFit([1, 2, 3], [1, 2, 2]) ➞ false
     // doesTriangleFit([1, 2, 4], [1, 2, 6]) ➞ false
+    console.log("** TASK 2 **");
     function isTriangle(arr) {
       var a = arr[0];
       var b = arr[1];
@@ -440,7 +487,6 @@
       });
       return arrSorted;
     }
-    console.log(sortArr([2, 1, 3]));
 
     function doesItFit(triangle1, triangle2) {
       var checkTriangle1 = isTriangle(triangle1);
@@ -466,7 +512,42 @@
     // plusSign("+d+=3=+s+") ➞ true
     // plusSign("f++d+g+8+") ➞ false
     // plusSign("+s+7+fg+r+8+") ➞ false
+    // console.log("** TASK 3 **");
+    // function plusSign(str) {
+    //   // var pre = "";
+    //   // var post = "";
+    //   var regex = /[a-z]/i;
 
+    //   for (var i = 0; i < str.length; i++) {
+    //     // console.log(str[i].search(regex));
+
+    //     if (
+    //       str[i].search(regex) === 0 &&
+    //       str[i - 1] === "+" &&
+    //       str[i + 1] === "+"
+    //     ) {
+    //       return true;
+    //     }
+
+    //     if (
+    //       str[i] !== "0" &&
+    //       str[i] !== "1" &&
+    //       str[i] !== "2" &&
+    //       str[i] !== "3" &&
+    //       str[i] !== "4" &&
+    //       str[i] !== "5" &&
+    //       str[i] !== "6" &&
+    //       str[i] !== "7" &&
+    //       str[i] !== "8" &&
+    //       str[i] !== "9"
+    //     ) {
+    //       // console.log(str[i]);
+    //     }
+    //   }
+    //   return false;
+    // }
+
+    // console.log(plusSign("+d+=3=+s+"));
     // 4. Create a function that takes a 5x5 2D array and returns true if it has at least one Bingo, and false if it doesn't.
     // Only check for diagonals, horizontals and verticals.
     // Examples:
@@ -513,13 +594,54 @@
     // A person with the Rh factor may only give blood to another person with the Rh factor.
     // A person with none of the above factors (O-) can give blood to anyone.
     // Write a function that takes in a donor's and receiver's blood types as strings and returns whether or not the donor can safely give blood to the receiver, according to the rules above.
-    // For clarity: all letters are capital and each blood type will be one of the following strings: "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-".
+    // For clarity: all letters are capital and each blood type will be one of the following strings:
+    // "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-".
     // Examples:
     // canGiveBlood("O+", "A+") ➞ true
     // canGiveBlood("A-", "B-") ➞ false
     // canGiveBlood("A-", "AB+") ➞ true
 
-    // function canGiveBlood(donor, receiver) {}
-    // console.log(canGiveBlood("0+", "A+"));
+    // A- moze A-, A+, AB-, AB+
+    // A+ moze A+, AB+
+
+    // B- moze B-, AB-
+    // B+ moze B+, AB+
+
+    // 0+ moze 0+, A+, B+, AB+
+    // 0- moze svima
+
+    // console.log("** TASK 5 **");
+
+    // function canGiveBlood(donor, receiver) {
+    //   var donorRh = donor[donor.length - 1] === "+" ? true : false;
+    //   var receiverRh = receiver[receiver.length - 1] === "+" ? true : false;
+
+    //   // for (var i = donor.length - 1; i >= 0; i++) {
+    //   //   donorAntigen = donor[i];
+    //   // }
+
+    //   // // var receiverAntigen = receiver[i];
+    //   // console.log(donorAntigen);
+    //   // console.log(donorRh, receiverRh);
+
+    //   // // if same
+    //   // if (donor === receiver) {
+    //   //   return true;
+    //   // }
+
+    //   // // A person with none of the above factors (O-) can give blood to anyone.
+    //   // if (donor === "0-") {
+    //   //   return true;
+    //   // }
+
+    //   // A person with antigen A may only give blood to another person with antigen A.
+    //   // if (donorAntigen === 'A')
+    //   // A person with antigen B may only give blood to another person with antigen B.
+
+    //   // A person with the Rh factor may only give blood to another person with the Rh factor.
+
+    //   // return false;
+    // }
+    // console.log(canGiveBlood("A-", "A+"));
   </script>
 </html>
