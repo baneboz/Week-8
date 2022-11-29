@@ -681,38 +681,49 @@
     // 0+ moze 0+, A+, B+, AB+
     // 0- moze svima
 
-    // console.log("** TASK 5 **");
+    console.log("** TASK 5 **");
 
-    // function canGiveBlood(donor, receiver) {
-    //   var donorRh = donor[donor.length - 1] === "+" ? true : false;
-    //   var receiverRh = receiver[receiver.length - 1] === "+" ? true : false;
+    function canGiveBlood(donor, receiver) {
+      // A person with none of the above factors (O-) can give blood to anyone.
+      if (donor === "0-") {
+        return true;
+      }
 
-    //   // for (var i = donor.length - 1; i >= 0; i++) {
-    //   //   donorAntigen = donor[i];
-    //   // }
+      // if same
+      if (donor === receiver) {
+        return true;
+      }
 
-    //   // // var receiverAntigen = receiver[i];
-    //   // console.log(donorAntigen);
-    //   // console.log(donorRh, receiverRh);
+      // Rh factor
+      var donorRh = donor[donor.length - 1] === "+" ? true : false;
+      var receiverRh = receiver[receiver.length - 1] === "+" ? true : false;
 
-    //   // // if same
-    //   // if (donor === receiver) {
-    //   //   return true;
-    //   // }
+      // Antigen
+      var donorAntigen = donor[0];
+      var receiverAntigen = receiver[0];
 
-    //   // // A person with none of the above factors (O-) can give blood to anyone.
-    //   // if (donor === "0-") {
-    //   //   return true;
-    //   // }
+      // A person with the Rh factor may only give blood to another person with the Rh factor.
+      if (donorRh && receiverRh === false) {
+        return false;
+      }
 
-    //   // A person with antigen A may only give blood to another person with antigen A.
-    //   // if (donorAntigen === 'A')
-    //   // A person with antigen B may only give blood to another person with antigen B.
+      // A person with antigen A may only give blood to another person with antigen A.
+      // A person with antigen B may only give blood to another person with antigen B.
+      if (donorAntigen === receiverAntigen) {
+        return true;
+      }
 
-    //   // A person with the Rh factor may only give blood to another person with the Rh factor.
+      // if Both antigen
+      if (receiver.length === 3) {
+        return true;
+      }
 
-    //   // return false;
-    // }
-    // console.log(canGiveBlood("A-", "A+"));
+      if (donorAntigen === "0") {
+        return true;
+      }
+
+      return false;
+    }
+    console.log(canGiveBlood("A-", "B-"));
   </script>
 </html>
